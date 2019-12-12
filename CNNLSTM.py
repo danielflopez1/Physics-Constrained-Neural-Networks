@@ -1,6 +1,6 @@
 """ This script demonstrates the use of a convolutional LSTM network.
-This network is used to predict the next frame of an artificially
-generated movie which contains moving squares.
+This network is used to predict the next coordinate of a tracked object from an artificially
+generated movie which contains the tracked object and its close by environment.
 """
 import numpy as np
 import keras
@@ -8,18 +8,13 @@ import keras.backend as K
 from keras.self.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten, TimeDistributed
 from keras.layers import Conv2D, LSTM, MaxPooling2D, CuDNNLSTM, Bidirectional
-#from keras.utils import np_utils
-#from keras.constraints import maxnorm
-#from keras.optimizers import SGD
 from keras.optimizers import Adam
-#from keras.layers.normalization import BatchNormalization
-#from sklearn.preprocessing import MinMaxScaler
 import h5py
 import functions as fn
 import csv
 
 class CNNLSTM:
-    def __init__(self):
+    def __init__(self):  #Hyperparameters initialization
         #fix random seed for reproducibility
         np.random.seed(7)
         self.xtraining = []
@@ -56,6 +51,7 @@ class CNNLSTM:
             print(self.sety[x])
         self.setTraining()
         self.normalize(self.xymax)
+    
     ### Select Amount of Training Examples
     def setTraining(self):
         for number in self.setsToTrain:
@@ -141,15 +137,10 @@ class CNNLSTM:
         print 'drop_rate:', drop_rate
         print 'early_stop_delta:', early_stop_delta
         print 'early_stop_patience:', early_stop_patience
-
-        # We create a layer which take as input movies of shape
-        # (n_frames, width, height, channels(RxGxBxXxY)) and returns the X,Y
-        # coordinates of moving object
-
+        
+        #Deep CNN network
         self.model = Sequential()
-
-        # define CNN self.model architecture
-
+        
         self.model.add(TimeDistributed(Conv2D(filters=n_filters, kernel_size=kernel_size, strides=input_strides,
                                          kernel_initializer=kernel_init,
                                          activation='relu'), input_shape=(self.t_steps, 100, 100, 5)))
@@ -165,66 +156,28 @@ class CNNLSTM:
                                          activation='relu')))
         self.model.add(TimeDistributed(MaxPooling2D(pool_size=max_poolsize)))
 
-        # self.model.add(TimeDistributed(Conv2D(filters=n_filters, kernel_size = kernel_size ,strides= input_strides,
-        #                  kernel_initializer= kernel_init,
-        #                  activation='relu')))
-        # self.model.add(TimeDistributed(MaxPooling2D(pool_size=max_poolsize)))
 
         self.model.add(TimeDistributed(Flatten()))
-
+        #MLP
         self.model.add(TimeDistributed(Dense(n_unitsFC1, activation='relu', kernel_initializer=kernel_init)))
         self.model.add(TimeDistributed(Dense(n_unitsFC1, activation='relu', kernel_initializer=kernel_init)))
-        # self.model.add(TimeDistributed(Dense(100, activation='relu')))
-        # self.model.add(TimeDistributed(Dense(150, activation='relu')))
         self.model.add(TimeDistributed(Dense(10, activation='linear', kernel_initializer=kernel_init)))
-
-        # Automatic Setup
-
-        # for ii in range (n_convpool_layers):
-        # for i in range(n_convlayers):
-        #  self.model.add(TimeDistributed(Conv2D(filters=n_filters, kernel_size = kernel_size ,strides= input_strides,
-        #                  kernel_initializer= kernel_init,
-        #                  activation='relu'),input_shape=(3,100,100,5)))
-        # self.model.add(TimeDistributed(MaxPooling2D(pool_size=max_poolsize)))
-
-        # self.model.add(TimeDistributed(Flatten()))
-
-        # define LSTM self.model
-
-        # self.model.add(Bidirectional(CuDNNLSTM(LSTM_neurons, return_sequences=False,kernel_initializer= kernel_init)))
-        # self.model.add(Bidirectional(CuDNNLSTM(LSTM_neurons, return_sequences=True,kernel_initializer= kernel_init)))
+        
+        #LSTM 
         self.model.add(CuDNNLSTM(LSTM_neurons, return_sequences=True, kernel_initializer=kernel_init))
-        # self.model.add(CuDNNLSTM(LSTM_neurons, return_sequences=True,kernel_initializer= kernel_init))
-        # self.model.add(CuDNNLSTM(LSTM_neurons,kernel_initializer= kernel_init))
-
-        # for i in range(n_reglayers):
-        # self.model.add(TimeDistributed(Dense(n_unitsFC2,activation='relu',kernel_initializer= kernel_init)))
-
-        ## To use when outputing single time steps
-        # self.model.add(Dense(n_unitsFC2,activation='relu',kernel_initializer= kernel_init))
-        # self.model.add(Dense(n_unitsFC2,activation='relu',kernel_initializer= kernel_init))
-
         self.model.add(Dense(n_output, activation='linear', kernel_initializer=kernel_init))
-
-        self.model.summary()
-
-
-
+        self.model.summary() #Get summary of network
         self.model.compile(loss=cost_function, optimizer='adam', metrics=[self.MAE])
-
         earlyStopping = keras.callbacks.EarlyStopping(monitor='val_loss', min_delta=early_stop_delta,
                                                       patience=early_stop_patience, verbose=1, mode='auto')
 
         # Train the network
-
         history = self.model.fit(xtraining[set_number], ytraining[set_number], epochs=n_epochs,
                             batch_size=batch_size, verbose=1,
                             callbacks=[earlyStopping],
                             validation_split=valid_set_ratio)
-        #        validation_data =[inp_valid,out_valid])
-
-        self.predict_initialTest()
-
+        
+        #Network observation inputs
         print 'cost_function:', cost_function
         print 'n_unitsFC1:', n_unitsFC1
         print 'n_unitsFC2:', n_unitsFC2
@@ -237,7 +190,7 @@ class CNNLSTM:
         print 'early_stop_delta:', early_stop_delta
         print 'early_stop_patience:', early_stop_patience
         # Save self.model
-        # self.model.save(out_filepath)
+        # self.model.save(out_filepath) #Used for saving the model 
 
         ## Post-Processing
     def predict_initialTest(self,fileNames):
@@ -279,47 +232,14 @@ class CNNLSTM:
             filewriter = csv.writer(csvfile)
             for j in range(0, out.shape[0]):
                 filewriter.writerow(out[j, :])
-
-        print('Network Params:')
-
-
-
-        # Testing the network on one movie
-        # feed it with the first 7 positions and then
-        # predict the new positions
-
-        # for j in range(16):
-        #    new_pos = seq.predict(track[np.newaxis, ::, ::, ::, ::])
-        #    new = new_pos[::, -1, ::, ::, ::]
-        #    track = np.concatenate((track, new), axis=0)
-
+'''
+# Example
 cnnlstm = CNNLSTM()
 fileNames = ['datasets/borders/ball_in_polygon_long10ball.h5','datasets/borders/ball_in_square_long10ball.h5','datasets/long_projectile_motion/projectileMotion3sec120fps_100_300.h5',
              'datasets/3_ball/ball_in_polygon_longer3ball.h5','datasets/borders/ball_in_polygon20hits.h5','datasets/borders/ball_in_box20hits.h5','datasets/3_ball/ball_on_box400.h5']
 for name in fileNames:
     cnnlstm.loadData(name)
-
-
-
-    ### Select Amount of Training Examples
-
-
-    ### Uncomment the following for single output pred
-    ## also adjust net structure
-
-    #y_train =  y_train [:,1,:]
-
-    ### Normalize inputs and outputs
-
-
-
-
-
-    #print(y_data[900:910,:])
-
-    #quit()
-
-
+'''
 
 
 
