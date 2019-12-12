@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-
+#This code is not used in the proeject yet, it might be used later for when we want to use real life video on objects
 # Setup SimpleBlobDetector parameters.
 params = cv2.SimpleBlobDetector_Params()
 
