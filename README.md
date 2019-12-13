@@ -16,8 +16,8 @@ h5py
 Every file is independent of each other, however, you may run in this sequence:
 - [simulator.py](#Simulator)
 - [box_select.py](#BoxSelect)
-- [cnn_lstm_training.py](#CNN LSTM training)
-- [time_marching.py](#Time Marching)
+- [cnn_lstm_training.py](#CNN)
+- [time_marching.py](#Time)
 
 ### Simulator
  simulator.py generates a physics simulation frames of a tracked object, square or polygon boundaries and other objects. 
