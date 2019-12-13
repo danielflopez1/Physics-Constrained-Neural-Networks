@@ -13,7 +13,7 @@ import h5py
 import cv2
 import os
 
-class simulate:
+class Simulate:
     def __init__(self):
         self.run_physics = True
         self.screenSize= self.h = self.w = 800 #!check matrices when changing the screen size!
@@ -459,5 +459,5 @@ class simulate:
         if self.getPictures:
             video.release()
 
-sim = simulate()
+sim = Simulate()
 sim.main()
