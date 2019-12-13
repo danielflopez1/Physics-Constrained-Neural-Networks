@@ -14,10 +14,10 @@ h5py
 
 # Configuration
 Every file is independent of each other, however, you may run in this sequence:
-- [simulator.py](#Simulator)
-- [box_select.py](#BoxSelect)
-- [cnn_lstm_training.py](#CNN)
-- [time_marching.py](#Time)
+- simulator.py
+- box_select.py
+- cnn_lstm_training.py
+- time_marching.py
 
 ### Simulator
  simulator.py generates a physics simulation frames of a tracked object, square or polygon boundaries and other objects. 
@@ -43,7 +43,7 @@ If generate_data is True, it will generate HDF5 files with frames of data and an
 If take_video is True, it will make a video of the frames.
 
 ### BoxSelect
-boxSelect.pyCrops the HDF5 frames using the HDF5 coordinates file which generates Locality.
+boxSelect.py crops the HDF5 frames using the HDF5 coordinates file which generates Locality.
 #### Inputs
 ```
 crop = SelectImage(size=100, frame_file = "full_ball_in_square_sider_v3.h5",coordinate_file = "xyrot_ball_in_square_sider_v3.h5")
