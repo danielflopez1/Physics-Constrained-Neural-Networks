@@ -28,15 +28,15 @@ sim.main()
 ```
 
 #### Scenarios
-1 - tracked ball in projectile motion.
-2 - tracked ball in square boundaries.
-3 - tracked ball and another ball in square boundaries.
-4 - tracked ball and 10 balls in a square with modifiable barrier size.
-5 - tracked ball with box objects in square boundaries.
-6 - tracked ball with boxes in square boundaries.
-7 - tracked ball with different polygon boundaries. 
-8 - tracked ball and 10 balls with a modifiable polygon. 
-9 - tracked ball and 10 balls and a simpler polygon for testing - this was constantly modified.
+1. Tracked ball in projectile motion.
+2. Tracked ball in square boundaries.
+3. Tracked ball and another ball in square boundaries.
+4. Tracked ball and 10 balls in a square with modifiable barrier size.
+5. Tracked ball with box objects in square boundaries.
+6. Tracked ball with boxes in square boundaries.
+7. Tracked ball with different polygon boundaries. 
+8. Tracked ball and 10 balls with a modifiable polygon. 
+9. Tracked ball and 10 balls and a simpler polygon for testing - this was constantly modified.
 
 #### Outputs
 If generate_data is True, it will generate HDF5 files with frames of data and an HDF5 file with the coordinates and rotation of the tracked ball.
