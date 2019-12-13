@@ -1,5 +1,5 @@
 # Physics learning using neural networks
-[Research](https://drive.google.com/file/d/1NNsIXCzIrc_wk570KmOr1ck69hq83zE1/view?usp=sharing) we show how the principle of spatio-temporal locality, inherent in all physical laws, can be used to create highly data-efficient deep learning architectures capable of embodying/discovering various elements of physical laws. We design the networks to understand and predict the time evolution of a system of colliding balls in a box in a gravity field. We show that learning from just one video less than a few seconds long, our networks can predict, with high accuracy, the evolution of unseen systems characterized by a different number of balls, different sized/shaped boxes, etc. Second, we design networks to understand the dynamics of a system governed by the Burrdge-Knopoff equations – idealization of earthquake propagation. In this, we show that from just one simulation, our networks can predict, with high accuracy, the generation of earthquake events in unseen systems characterized by different material properties of the medium in which the earthquakes are propagating. 
+In this [Research](https://drive.google.com/file/d/1NNsIXCzIrc_wk570KmOr1ck69hq83zE1/view?usp=sharing) we show how the principle of spatio-temporal locality, inherent in all physical laws, can be used to create highly data-efficient deep learning architectures capable of embodying/discovering various elements of physical laws. We design the networks to understand and predict the time evolution of a system of colliding balls in a box in a gravity field. We show that learning from just one video less than a few seconds long, our networks can predict, with high accuracy, the evolution of unseen systems characterized by a different number of balls, different sized/shaped boxes, etc. Second, we design networks to understand the dynamics of a system governed by the Burrdge-Knopoff equations – idealization of earthquake propagation. In this, we show that from just one simulation, our networks can predict, with high accuracy, the generation of earthquake events in unseen systems characterized by different material properties of the medium in which the earthquakes are propagating. 
 
 ## How to use
 ### Prerequisites
@@ -13,9 +13,11 @@ h5py
 ```
 
 # Configuration
-Every file is independent of each other, however, you may run in this sequence for input to output matching.
-- [Simulator.py](#Simulator.py)
-- [BoxSelect.py](#BoxSelect.py)
+Every file is independent of each other, however, you may run in this sequence:
+- [simulator.py](#Simulator)
+- [box_select.py](#BoxSelect)
+- [cnn_lstm_training.py](#CNN LSTM training)
+- [time_marching.py](#Time Marching)
 
 ### Simulator
  simulator.py generates a physics simulation frames of a tracked object, square or polygon boundaries and other objects. 
