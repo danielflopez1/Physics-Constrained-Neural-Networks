@@ -292,18 +292,6 @@ class Simulate:
                              random.randint(-800, 1000), random.randint(-1000, 1000))
 
 
-    def scenario12(self):
-        self.createObservedBall(25, 1, 400, 400, 1.0, 600, 400)
-        # Create Initial Lines
-        size = 0
-        lines = [[75+size, 75+size, 500-size, 50+size], [500-size, 50+size, 750-size, 350+size], [750-size, 350+size, 650-size, 650-size],
-                 [650-size, 650-size, 500-size, 750-size],[500-size, 750-size, 50+size, 500-size],[75+size, 75+size, 50+size, 500-size]]
-        for line in lines:
-            self.createBoundaries(line)
-        numBalls = 0
-        for x in range(numBalls):
-            self.createBalls(25, 1, 80+size + divmod(x, 10)[1] * 50, 290+size + divmod(x, 10)[0] * 50, 1,
-                             random.randint(-800, 1000), random.randint(-1000, 1000))
 
     # create observed ball and 10 balls and simpler polygon for testing
     def scenario9(self):
@@ -316,22 +304,8 @@ class Simulate:
         for x in range(numBalls):
             self.createBalls(25, 1, 100 + x * 50, 400 + x * 50, 1, random.randint(-800, 800), random.randint(-800, 800))
 
-    #create observed ball and simpler polygon for testing
-    def scenario10(self):
-        self.createObservedBall(25, 1, 250, 450, 1.0, 800, -100)
-        # Create Initial Lines
-        lines = [[65, 65, 500, 50], [500, 50, 750, 350], [750, 350, 650, 650], [650, 650, 500, 750],[500, 750, 50, 500],[65, 65, 50, 500]]
-        for line in lines:
-            self.createBoundaries(line)
 
 
-    # create observed ball and simpler square for testing
-    def scenario11(self):
-        self.createObservedBall(25, 1, 100, 167, 1.0, 0, 0)
-        # Create Initial Lines
-        lines = [[50, 50, 50, 650],[50,650,650,750], [650, 750,650, 250]]
-        for line in lines:
-            self.createBoundaries(line)
     #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     def main(self):
         pygame.init()
