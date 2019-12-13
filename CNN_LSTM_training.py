@@ -1,6 +1,6 @@
-""" This script demonstrates the use of a convolutional LSTM network.
-This network is used to predict the next frame of an artificially
-generated movie which contains moving squares.
+""" This script demonstrates the use of a Convolutional-LSTM network.
+This network is used to predict the next coordinates of an artificially
+generated movie which contains a tracked object in a physics environment.
 """
 
 import os 
@@ -11,7 +11,6 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten, TimeDistributed
 from keras.layers import Conv2D, LSTM, MaxPooling2D, CuDNNLSTM, Bidirectional
 from keras.optimizers import Adam
-#from keras.layers.normalization import BatchNormalization
 import h5py
 import functions as fn
 import csv
@@ -102,7 +101,7 @@ diff_step = 0
 axis = 0
 
 n_train = 700#2200
-n_test = 120*6
+n_test = 300
 
 ### Reshape data
 gc.collect()
@@ -283,7 +282,7 @@ history = model.fit(x_train, y_train, epochs=n_epochs,
 #        validation_data =[inp_valid,out_valid])
 
 # Save model 
-#model.save(out_filepath)
+model.save(out_filepath)
 
 gc.collect()
 
