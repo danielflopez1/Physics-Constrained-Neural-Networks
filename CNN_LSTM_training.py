@@ -67,31 +67,7 @@ x_data4 = x_data4['matrices']
 y_data4 = h5py.File(output_filename4, 'r')
 y_data4 = y_data4['matrices']
 y_data4 = y_data4[:,:2]
-'''
-x_data5 = h5py.File(input_filename5, 'r')
-x_data5 = x_data5['matrices']
-y_data5 = h5py.File(output_filename5, 'r')
-y_data5 = y_data5['matrices']
-y_data5 = y_data5[:,:2]
 
-x_data6 = h5py.File(input_filename6, 'r')
-x_data6 = x_data6['matrices']
-y_data6 = h5py.File(output_filename6, 'r')
-y_data6 = y_data6['matrices']
-y_data6 = y_data6[:,:2]
-
-x_data7 = h5py.File(input_filename7, 'r')
-x_data7 = x_data7['matrices']
-y_data7 = h5py.File(output_filename7, 'r')
-y_data7 = y_data7['matrices']
-y_data7 = y_data7[:,:2]
-
-x_data8 = h5py.File(input_filename8, 'r')
-x_data8 = x_data8['matrices']
-y_data8 = h5py.File(output_filename8, 'r')
-y_data8 = y_data8['matrices']
-y_data8 = y_data8[:,:2]
-'''
 print('Filename1 Size')
 print(x_data1.shape)
 print(y_data1.shape)
@@ -119,16 +95,7 @@ print(x_data1.shape)
 print(x_data2.shape)
 print(x_data3.shape)
 print(x_data4.shape)
-'''
-x_data5 = x_data5[np.arange(0,x_data5.shape[0],subsamp_ratio),:,:,:]
-y_data5 = y_data5[np.arange(0,y_data5.shape[0],subsamp_ratio),:]
-x_data6 = x_data6[np.arange(0,x_data6.shape[0],subsamp_ratio),:,:,:]
-y_data6 = y_data6[np.arange(0,y_data6.shape[0],subsamp_ratio),:]
-x_data7 = x_data7[np.arange(0,x_data7.shape[0],subsamp_ratio),:,:,:]
-y_data7 = y_data7[np.arange(0,y_data7.shape[0],subsamp_ratio),:]
-x_data8 = x_data8[np.arange(0,x_data8.shape[0],subsamp_ratio),:,:,:]
-y_data8 = y_data8[np.arange(0,y_data8.shape[0],subsamp_ratio),:]
-'''
+
 
 t_steps = 3
 diff_step = 0
@@ -150,16 +117,7 @@ print('set3')
 x_set3,y_set3 = fn.sequence_input(x_data3,y_data3,t_steps,axis,diff_step)
 print('set4')
 x_set4,y_set4 = fn.sequence_input(x_data4,y_data4,t_steps,axis,diff_step)
-'''
-print('set5')
-x_set5,y_set5 = fn.sequence_input(x_data5,y_data5,t_steps,axis,diff_step)
-print('set6')
-x_set6,y_set6 = fn.sequence_input(x_data6,y_data6,t_steps,axis,diff_step)
-print('set7')
-x_set7,y_set7 = fn.sequence_input(x_data7,y_data7,t_steps,axis,diff_step)
-print('set8')
-x_set8,y_set8 = fn.sequence_input(x_data8,y_data8,t_steps,axis,diff_step)
-'''
+
 
 # For single output
 pred_step = 0
@@ -168,33 +126,14 @@ y_set2 = y_set2[:,pred_step,:]
 
 y_set3 = y_set3[:,pred_step,:]
 y_set4 = y_set4[:,pred_step,:]
-'''
-y_set5 = y_set5[:,pred_step,:]
-y_set6 = y_set6[:,pred_step,:]
-y_set7 = y_set7[:,pred_step,:]
-y_set8 = y_set8[:,pred_step,:]
-'''
+
 
 print('Pre-norm Shapes:')
 print(x_set1.shape)
 print(x_set2.shape)
 print(x_set3.shape)
 print(x_set4.shape)
-'''
-print(x_set5.shape)
-print(x_set6.shape)
 
-print(y_set1.shape)
-print(y_set2.shape)
-print(y_set3.shape)
-print(y_set4.shape)
-
-print(y_set5.shape)
-print(y_set6.shape)
-
-
-quit()
-'''
 ### Select Amount of Training Examples
 nred = 0
 
@@ -214,16 +153,7 @@ print("train", x_train.shape)
 x_train = np.concatenate((np.concatenate((np.concatenate((x_train,x_set2)),x_set3)),x_set4))
 y_train = np.concatenate((np.concatenate((np.concatenate((y_train,y_set2)),y_set3)),y_set4))
 print("train2", x_train.shape)
-'''
-x_set5=x_set5[:n_test,:,nred:100-nred,nred:100-nred,:]
-y_set5=y_set5[:n_test,:]
-x_set6=x_set6[:n_test,:,nred:100-nred,nred:100-nred,:]
-y_set6=y_set6[:n_test,:]
-x_set7=x_set7[:n_test,:,nred:100-nred,nred:100-nred,:]
-y_set7=y_set7[:n_test,:]
-x_set8=x_set8[:n_test,:,nred:100-nred,nred:100-nred,:]
-y_set8=y_set8[:n_test,:]
-'''
+
 
 print('Pre-norm Shapes:')
 
@@ -232,27 +162,9 @@ print(x_set2.shape)
 
 print(x_set3.shape)
 print(x_set4.shape)
-'''
-print(x_set5.shape)
-print(x_set6.shape)
-print(x_set7.shape)
-print(x_set8.shape)
 
-print(y_set1.shape)
-print(y_set2.shape)
 
-print(y_set3.shape)
-print(y_set4.shape)
-
-print(y_set5.shape)
-print(y_set6.shape)
-print(y_set7.shape)
-print(y_set8.shape)
-gc.collect()
-'''
-
-### Uncomment the following for single output pred
-## also adjust net structure 
+### Uncomment the following for single output pred also adjust net structure 
 
 #y_train =  y_train [:,1,:]
 
@@ -274,29 +186,7 @@ x_set3,xdata_mean,xdata_range = fn.data_normalize_v2(x_set3,norm_type= xnorm_typ
 y_set3,ydata_mean,ydata_range = fn.data_normalize(y_set3,norm_type='max',data_mean=0,data_range=xymax)
 x_set4,xdata_mean,xdata_range = fn.data_normalize_v2(x_set4,norm_type= xnorm_type,data_mean=xdata_mean,data_range=xdata_range,norm_axis=norm_axis)
 y_set4,ydata_mean,ydata_range = fn.data_normalize(y_set4,norm_type='max',data_mean=0,data_range=xymax)
-'''
-x_set5,xdata_mean,xdata_range = fn.data_normalize_v2(x_set5,norm_type= xnorm_type,data_mean=xdata_mean,data_range=xdata_range,norm_axis=norm_axis)
-y_set5,ydata_mean,ydata_range = fn.data_normalize(y_set5,norm_type='max',data_mean=0,data_range=xymax)
-x_set6,xdata_mean,xdata_range = fn.data_normalize_v2(x_set6,norm_type= xnorm_type,data_mean=xdata_mean,data_range=xdata_range,norm_axis=norm_axis)
-y_set6,ydata_mean,ydata_range = fn.data_normalize(y_set6,norm_type='max',data_mean=0,data_range=xymax)
-x_set7,xdata_mean,xdata_range = fn.data_normalize_v2(x_set7,norm_type= xnorm_type,data_mean=xdata_mean,data_range=xdata_range,norm_axis=norm_axis)
-y_set7,ydata_mean,ydata_range = fn.data_normalize(y_set7,norm_type='max',data_mean=0,data_range=xymax)
-x_set8,xdata_mean,xdata_range = fn.data_normalize_v2(x_set8,norm_type= xnorm_type,data_mean=xdata_mean,data_range=xdata_range,norm_axis=norm_axis)
-y_set8,ydata_mean,ydata_range = fn.data_normalize(y_set8,norm_type='max',data_mean=0,data_range=xymax)
 
-# Set for single output
-
-
-print('Post-norm Shapes:')
-print(x_set5.shape)
-print(x_test.shape)
-print(x_train.shape)
-print(y_set5.shape)
-
-print(y_test.shape)
-print(y_train.shape)
-#print(y_data[900:910,:])
-'''
 gc.collect()
 
 ##### CNN-LSTM Parameter Control Module #####
@@ -447,119 +337,3 @@ score = model.evaluate(x_set4, y_set4, verbose=0)
 print 'Test loss:', score[0]
 print 'Test error:', score[1]
 
-gc.collect()
-'''
-## Post-Processing
-print('Test Case 5:')
-print(input_filename5)
-print('Actual Values')
-print(y_set5[10:12,:])
-print('Predicted Values')
-print((model.predict_on_batch(x_set5[10:12,:,:,:,:])))
-
-score = model.evaluate(x_set5, y_set5, verbose=0)
-print 'Test loss:', score[0]
-print 'Test error:', score[1]
-
-
-print('Test Case 6:')
-print(input_filename6)
-print('Actual Values')
-print(y_set6[10:12,:])
-print('Predicted Values')
-print((model.predict_on_batch(x_set6[10:12,:,:,:,:])))
-
-score = model.evaluate(x_set6, y_set6, verbose=0)
-print 'Test loss:', score[0]
-print 'Test error:', score[1]
-
-print('Test Case 7:')
-print(input_filename7)
-print('Actual Values')
-print(y_set7[10:12,:])
-print('Predicted Values')
-print((model.predict_on_batch(x_set7[10:12,:,:,:,:])))
-
-gc.collect()
-
-score = model.evaluate(x_set7, y_set7, verbose=0)
-print 'Test loss:', score[0]
-print 'Test error:', score[1]
-
-print('Test Case 8:')
-print(input_filename8)
-print('Actual Values')
-print(y_set8[10:12,:])
-print('Predicted Values')
-print((model.predict_on_batch(x_set8[10:12,:,:,:,:])))
-
-score = model.evaluate(x_set8, y_set8, verbose=0)
-print 'Test loss:', score[0]
-print 'Test error:', score[1]
-
-print('Saving data..')
-
-gc.collect()
-
-#env_jobid = os.environ['PBS_JOBID']
-#pbs_jobid = [int(s) for s in env_jobid.split('.') if s.isdigit()]
-
-#target_test = y_set3
-#output_test = model.predict_on_batch(x_set3)
-fileformat = '.h5'
-#print(input_filename3)
-
-#hf = h5py.File(outdata_filename + str(pbs_jobid) + fileformat, 'w')
-#hf.create_dataset('target_set3', data=target_test)
-#hf.create_dataset('output_set3', data=output_test)
-
-target_test = y_set2
-output_test = model.predict(x_set2)
-print(input_filename2)
-#filename = 'output_data/train3ball_ballbounce_singleout'
-fileformat = '.h5'
-
-hf = h5py.File(outdata_filename + str(pbs_jobid) + fileformat, 'w')
-hf.create_dataset('target_set2', data=target_test)
-hf.create_dataset('output_set2', data=output_test)
-
-target_test = y_test[0:n_test,:]
-output_test = model.predict(x_test[0:n_test,:,:,:,:])
-print(input_filename1)
-print(target_test.shape)
-print(output_test.shape)
-hf.create_dataset('target_test', data=target_test)
-hf.create_dataset('output_test', data=output_test)
-
-#with open(filename+fileformat, 'wb') as csvfile:
-#        filewriter = csv.writer(csvfile)
-#        for j in range(0,out.shape[0]):
-#            filewriter.writerow(out[j,:])
-
-
-
-print('Network Params:')
-
-print 'cost_function:', cost_function
-print 'n_unitsFC1:',n_unitsFC1
-print 'n_unitsFC2:',n_unitsFC2
-print 'LSTM_neurons:', LSTM_neurons
-print 'batch_size:', batch_size
-print 'kernel_size:', kernel_size
-print 'n_filters:', n_filters
-print 'max_poolsize:', max_poolsize
-print 'drop_rate:', drop_rate
-print 'early_stop_delta:', early_stop_delta
-print 'early_stop_patience:', early_stop_patience
-
-
-# Testing the network on one movie
-# feed it with the first 7 positions and then
-# predict the new positions
-
-#for j in range(16):
-#    new_pos = seq.predict(track[np.newaxis, ::, ::, ::, ::])
-#    new = new_pos[::, -1, ::, ::, ::]
-#    track = np.concatenate((track, new), axis=0)
-
-'''
