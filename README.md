@@ -14,8 +14,11 @@ h5py
 
 # Configuration
 Every file is independent of each other, however, you may run in this sequence for input to output matching.
-### Simulator.py
-Generates a physics simulation frames of a tracked object, square or polygon boundaries and other objects. 
+- [Simulator.py](#Simulator.py)
+- [BoxSelect.py](#BoxSelect.py)
+
+### Simulator
+ simulator.py generates a physics simulation frames of a tracked object, square or polygon boundaries and other objects. 
 #### Inputs
 ```
 sim = Simulate(scenario = 4, generate_data = True, take_video = False, file_name = 'filename')
@@ -37,8 +40,8 @@ sim.main()
 If generate_data is True, it will generate HDF5 files with frames of data and an HDF5 file with the coordinates and rotation of the tracked ball.
 If take_video is True, it will make a video of the frames.
 
-### boxSelect.py
-Crops the HDF5 frames using the HDF5 coordinates file which generates Locality.
+### BoxSelect
+boxSelect.pyCrops the HDF5 frames using the HDF5 coordinates file which generates Locality.
 #### Inputs
 ```
 crop = SelectImage(size=100, frame_file = "full_ball_in_square_sider_v3.h5",coordinate_file = "xyrot_ball_in_square_sider_v3.h5")
@@ -47,8 +50,8 @@ crop.output()
 #### Outputs
 Cropped HDF5 file of stated size.
 
-### CNN_LSTM_training.py
-Modify the input files in the file and run the file 
+### CNN LSTM training
+cnn_lstm_training.py modifies the input files in the file and run the file 
 #### Inputs
 Take multiple corresponding cropped HDF5 frame files and HDF5 coordinate file
 input_filename1 = '/home/username/datasets-1.h5'
@@ -60,8 +63,8 @@ output_filenameN = '/home/username/xydatasets-N.h5'
 #### Outputs
 Saved model
 
-### blankSlate.py
-It generates a blank slate by removing the previous red ball and making a new ball in the new coordinate.
+### BlankSlate
+BlankSlate.py generates a blank slate by removing the previous red ball and making a new ball in the new coordinate.
 This is used in time_marching.py to generate a frame from a prediction of the model. 
 #### Inputs
 Tkes size of the cropped frame, HDF5 frames file, frame index and and the predicted coordinate
@@ -72,8 +75,8 @@ img.output(frame_index,x,y)
 #### Output
 It outputs a frame 2Darray (It is not HDF5 since it is being used in time_marching)
 
-### time_marching.py
-This file is modified and then ran in python. It uses a starting HDF5 file to generate predictions that are set as a new 2D frame and queues its image predictions as inputs to generate predictions over time.
+### Time Marching
+time_marching.py is modified and then ran in python. It uses a starting HDF5 file to generate predictions that are set as a new 2D frame and queues its image predictions as inputs to generate predictions over time.
 #### Inputs
 It uses a the HDF5 trained network, input and output normalizing file used in training and the full and cropped frame of the file of which you want to generate predictions.
 
@@ -86,3 +89,7 @@ inp2 = '/home/cropped_frames_to_predict_over.h5'
 #### Outputs
 Coordinate predictions over X timesteps.
 
+# Developers
+* Daniel Lopez 
+* David Finol
+* Ankit Srivastava
