@@ -3,7 +3,7 @@ import numpy as np
 import h5py
 import os
 
-class changeFrame:
+class ChangeFrame:
     def __init__(self,size,imagefilepath):
         self.size = size
         self.file = h5py.File(imagefilepath)            #get image coordinates of where the ball is going through
@@ -95,6 +95,6 @@ class changeFrame:
 ''' 
 #Example
 size = 100
-img = changeFrame(size, 'full_3ball_in_concave_polygon_v3.h5')
+img = ChangeFrame(size, 'full_3ball_in_concave_polygon_v3.h5')
 img.output(80,163,524)
 '''
