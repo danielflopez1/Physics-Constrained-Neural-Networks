@@ -94,7 +94,8 @@ Coordinate predictions over X timesteps.
 
 # Presentations:
 [ThinkChicago At Chicago Ideas Week](http://www.worldbusinesschicago.com/event/thinkchicago-at-chicago-ideas-week/)
-The Midwest Mechanics of Materials and Structures Conference 2018, Chicago, IL
+
+[The Midwest Mechanics of Materials and Structures Conference](https://sites.google.com/iit.edu/midmechmat-2018/home?authuser=0) 2018, Chicago, IL
 # Developers
 * Daniel Lopez 
 * David Finol
