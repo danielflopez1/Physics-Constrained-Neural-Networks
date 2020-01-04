@@ -92,7 +92,11 @@ cropped_frames = '/home/cropped_frames_used_to_predict.h5'
 #### Outputs
 Coordinate predictions over X timesteps.
 
+# Presentations:
+[ThinkChicago At Chicago Ideas Week](http://www.worldbusinesschicago.com/event/thinkchicago-at-chicago-ideas-week/)
+The Midwest Mechanics of Materials and Structures Conference 2018, Chicago, IL
 # Developers
 * Daniel Lopez 
 * David Finol
 * Ankit Srivastava
+* Ahmed Elbanna
